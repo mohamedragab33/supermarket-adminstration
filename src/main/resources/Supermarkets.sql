@@ -1,0 +1,5 @@
+INSERT into Supermarket(Arabic_Name,English_Name,Address,Image,Creation_Date) VALUES ('كارفور','carrefour','Head Office Building - Ring Road - Mearaj City','carrefour.jpg',CURRENT_TIMESTAMP);
+INSERT into Supermarket(Arabic_Name,English_Name,Address,Image,Creation_Date) VALUES ('ادسا','Asda','Asda House, Great Wilson Street , Southbank, LEEDS, Yorkshire , LS11 5AD ','1.jpg',CURRENT_TIMESTAMP);
+INSERT into Supermarket(Arabic_Name,English_Name,Address,Image,Creation_Date) VALUES ('المجموعه المتحده','Co-operative Group','New Century House, Corporation Street , MANCHESTER , M60 4ES','2.jpg',CURRENT_TIMESTAMP);
+INSERT into Supermarket(Arabic_Name,English_Name,Address,Image,Creation_Date) VALUES ('سبنسر','Marks & Spencer','Waterside House, 35 North Wharf Road , LONDON , W2 1NW','3.jpg',CURRENT_TIMESTAMP);
+INSERT into Supermarket(Arabic_Name,English_Name,Address,Image,Creation_Date) VALUES ('سبنس','Spinneys','Hilmore House, Gain Lane , BRADFORD, Yorkshire , BD3 7DL','4.jpg',CURRENT_TIMESTAMP);
