@@ -94,4 +94,28 @@ public class Supermarket {
 		this.creationDate = creationDate;
 	}
 
+	public Supermarket(int id, String arabicName, String englishName, String address, int active
+			) {		
+		this.id = id;
+		this.arabicName = arabicName;
+		this.englishName = englishName;
+		this.address = address;		
+		this.active = active;		
+	}
+
+
+	
+	
+	public Supermarket(String arabicName, String englishName, String address, int active) {
+		this.arabicName = arabicName;
+		this.englishName = englishName;
+		this.address = address;
+		this.active = active;
+	}
+
+	public Supermarket() {}
+	
+
+
+	
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.supermarkets.exceptions.InternalServerError;
 import com.supermarkets.exceptions.ResourceNotFoundException;
 import com.supermarkets.models.Supermarket;
@@ -53,13 +52,18 @@ public class AdminController {
 
 	}
 
-	@PostMapping(value = "/supermarket", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
-			MediaType.APPLICATION_JSON_VALUE })
-	private ResponseEntity<Supermarket> saveSupermarket(
-			@RequestPart(name = "image", required = false) MultipartFile multipartFile,
-			@RequestPart("supermarket") String supermarketReq) {
+	@PostMapping(value = "/supermarket", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	private ResponseEntity<Supermarket> saveSupermarket(			
+			@RequestPart(name = "arabicName", required = true) String arabicName,
+			@RequestPart(name = "englishName", required = true) String englishName,
+			@RequestPart(name = "address", required = true) String address,
+			@RequestPart(name = "active", required = true) String activeS,
+			@RequestPart(name = "image", required = false) MultipartFile multipartFile
+		) {
 		try {
-			Supermarket supermarket = mapSupermarket(supermarketReq);
+			int active = Integer.parseInt(activeS);					
+		   Supermarket supermarket = new Supermarket(arabicName, englishName, address,active);
+			
 			return new ResponseEntity<>(saveSuperMarket(supermarket, multipartFile), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new InternalServerError(e.getMessage());
@@ -68,11 +72,16 @@ public class AdminController {
 
 	@PutMapping(value = "/supermarket", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.MULTIPART_FORM_DATA_VALUE })
-	private ResponseEntity<Supermarket> updateSupermarket(@RequestParam("id") int supermarketID,
-			@RequestPart("supermarket") String supermarketReq,
-			@RequestPart(name = "image", required = false) MultipartFile multipartFile) {
+	private ResponseEntity<Supermarket> updateSupermarket(@RequestParam("id") int supermarketID,		
+			@RequestPart(name = "arabicName", required = false) String arabicName,
+			@RequestPart(name = "englishName", required = false) String englishName,
+			@RequestPart(name = "address", required = false) String address,	
+			@RequestPart(name = "active", required = false) String activeS,
+			@RequestPart(name = "image", required = false) MultipartFile multipartFile
+			) {
 		try {
-			Supermarket supermarket = mapSupermarket(supermarketReq);
+			int active = Integer.parseInt(activeS);	
+			Supermarket supermarket = new Supermarket(arabicName, englishName, address,active);
 			return new ResponseEntity<>(updateSupermarket(supermarket, multipartFile, supermarketID),
 					HttpStatus.CREATED);
 
@@ -116,26 +125,16 @@ public class AdminController {
 
 	}
 
-	public Supermarket mapSupermarket(String supermarket) {
-		Supermarket conSupermarket = new Supermarket();
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			conSupermarket = objectMapper.readValue(supermarket, Supermarket.class);
-			return conSupermarket;
-		} catch (IOException e) {
-			throw new InternalServerError("Error on converting");
-		}
-
-	}
 
 	public Supermarket saveSuperMarket(Supermarket supermarket, MultipartFile multipartFile) {
 		try {
 			Supermarket supermarketRes = new Supermarket();
 			if (multipartFile != null && !multipartFile.isEmpty()) {
-				String fileName = supermarket.getEnglishName().replaceAll("\\s+", "_") + ".jpg";
-				supermarket.setImage(fileName);
+				String fileName = supermarket.getEnglishName().replaceAll("\\s+", "_") + ".jpg";				
 				supermarketRes = adminstrationService.saveSupermarket(supermarket);
 				String uploadDir = "supermarket_photos/" + supermarketRes.getId();
+				supermarket.setImage("/"+uploadDir+"/"+fileName);
+				supermarketRes = adminstrationService.updateSupermarket(supermarket, supermarketRes.getId());	
 				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			} else
 				supermarketRes = adminstrationService.saveSupermarket(supermarket);
@@ -151,9 +150,9 @@ public class AdminController {
 			Supermarket supermarketRes = new Supermarket();
 			if (multipartFile != null && !multipartFile.isEmpty()) {
 				String fileName = supermarket.getEnglishName().replaceAll("\\s+", "_") + ".jpg";
-				supermarket.setImage(fileName);
-				supermarketRes = adminstrationService.updateSupermarket(supermarket, supermarketID);
-				String uploadDir = "supermarket_photos/" + supermarketRes.getId();
+				String uploadDir = "supermarket_photos/" + supermarketID;
+				supermarket.setImage("/"+uploadDir+"/"+fileName);
+				supermarketRes = adminstrationService.updateSupermarket(supermarket, supermarketID);				
 				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			} else
 				supermarketRes = adminstrationService.updateSupermarket(supermarket, supermarketID);
