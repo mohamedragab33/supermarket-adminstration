@@ -31,7 +31,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/admin/api/supermarket?id=1",
+					"raw": "localhost:8080/admin/api/supermarket?id=2",
 					"host": [
 						"localhost"
 					],
@@ -44,7 +44,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -97,17 +97,38 @@
 						{
 							"key": "supermarket",
 							"value": "{\"arabicName\": \"المجموعه المتحده\",\n        \"englishName\": \"Co-operative Group\",\n        \"address\": \"New Century House, Corporation Street , MANCHESTER , M60 4ES\",\n                \"active\": 1}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "arabicName",
+							"value": "الكانه",
+							"type": "text"
+						},
+						{
+							"key": "englishName",
+							"value": "elkana",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "elkana 4 ",
+							"type": "text"
+						},
+						{
+							"key": "active",
+							"value": "1",
 							"type": "text"
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/C:/Users/mohar/Desktop/test.jpg"
+							"src": "/C:/Users/mohar/Downloads/IMG_0091.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:8080/admin/api/supermarket?id=1",
+					"raw": "localhost:8080/admin/api/supermarket?id=2",
 					"host": [
 						"localhost"
 					],
@@ -120,7 +141,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -133,7 +154,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/admin/api/supermarket/activate?id=1",
+					"raw": "localhost:8080/admin/api/supermarket/activate?id=2",
 					"host": [
 						"localhost"
 					],
@@ -147,7 +168,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -187,7 +208,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/admin/api/supermarket?id=1",
+					"raw": "localhost:8080/admin/api/supermarket?id=2",
 					"host": [
 						"localhost"
 					],
@@ -200,7 +221,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
