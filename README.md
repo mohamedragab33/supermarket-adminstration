@@ -52,7 +52,7 @@ The app will start running at <http://localhost:8080>.
 ```bash
  Collection for Supermarkets Api.postman_collection.json from 
 ```
-Requests collection Folder on project 
+project Files
 
 ## Explore Rest APIs By swagger 
 
