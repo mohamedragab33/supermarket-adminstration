@@ -13,6 +13,7 @@ import com.supermarkets.models.Supermarket;
 public interface AdminstrationRepository extends  JpaRepository<Supermarket, Integer> {
 	
 	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query("update Supermarket set Active=1  where Supermarket_Id =:id")
 	void activate(@Param("id")int id);
 	
